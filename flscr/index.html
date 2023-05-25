@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>scr toolkit</title>
+  	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+	
+
+  <style>
+	* {
+	 font-size: 105%;
+	 font-family: 'Roboto Mono', monospace;
+
+	}
+	
+	.piano {
+	user-select: none;
+	}
+	
+    .key {
+      display: inline-block;
+	  font-size:135%;
+	  text-align: center;
+      width: 40px;
+      height: 120px;
+      border: 1px solid #000;
+      background-color: #fff;
+      cursor: pointer;
+
+    }
+    .key.black {
+      background-color: #000;
+      color: #fff;
+    }
+    .key.red {
+      background-color: #FB9244;
+    }
+	.key.black.red {
+	 background-color: #E85028;
+	}
+	a {
+	color: #FB9244;
+	text-decoration: none;
+	}
+	
+	textarea {
+	height: 100px;
+	width: 175px;
+	}
+	
+	h1:target {
+	color: #FB9244;
+	}
+	
+	.sidebar { 
+	width:15%;
+	padding-left: 15px;
+	right:0;
+	display: flex;
+	flex-direction: column;
+	position: fixed;
+	}
+	
+	.main {
+	margin-right:15%;
+	margin-left:1.5%;
+	margin-top:1.25%;
+	}
+	
+	.trueh1 {
+	font-size: 125%;
+	}
+	
+	.info {
+	color: #E85028;
+	}
+  </style>
+</head>
+<body>
+
+
+<div class="sidebar">
+  <b><u>Navigation/Help</u></b><br>
+	<a href="#note selector" class="sidebarlink">note selector</a><br>
+    <a href="#scroutput" class="sidebarlink">scr output</a><br>
+	<a href="#about" class="sidebarlink">about</a><br>
+	<span>What is..</span><br>
+	<a href="#functionality" class="sidebarlink">this site</a><br>
+	<a href="#pitchclass" class="sidebarlink">a pitch class set</a><br>
+	<a href="#scrfile" class="sidebarlink">a .scr file</a><br>
+
+	<span>Helpful sites:</span><br>
+	<a href="https://ianring.com/musictheory/">ianring.com</a>
+</div>
+<div class="main">
+
+  <h1 class="trueh1" id="note selector">Note Selector</h1>
+  <div class="piano" id="piano">
+    <div class="key white selected" onclick="selectKey(0)">C</div>
+    <div class="key black" onclick="selectKey(1)">C#</div>
+    <div class="key white" onclick="selectKey(2)">D</div>
+    <div class="key black" onclick="selectKey(3)">D#</div>
+    <div class="key white" onclick="selectKey(4)">E</div>
+    <div class="key white" onclick="selectKey(5)">F</div>
+    <div class="key black" onclick="selectKey(6)">F#</div>
+    <div class="key white" onclick="selectKey(7)">G</div>
+    <div class="key black" onclick="selectKey(8)">G#</div>
+    <div class="key white" onclick="selectKey(9)">A</div>
+    <div class="key black" onclick="selectKey(10)">A#</div>
+    <div class="key white" onclick="selectKey(11)">B</div>
+  </div>
+  <b>
+<br>
+  <span id="text">Note Selector Output:</span>
+  <input type="text" id="output" readonly><br><br>
+  <span id="text">Manual Pitch Class Set Input:</span>
+  <input type="text" id="input" placeholder="e.g. {0,2,4,5,7,9,11}" oninput="handleInput()"><br>
+  </b><span class="info" id="info"></span><br>
+  <span id="text">All scales need to be in C.</span>
+  
+  <hr>
+  
+  <h1 class="trueh1" id="scroutput">Scr Output</h1>
+  <button onclick="downloadTextFile()">Download .scr File</button><br><br>
+  <button onclick="copyToClipboard()">Copy to Clipboard</button><br><br>
+  
+  <textarea id="outputPitchSet" readonly></textarea>
+  
+  <hr>
+
+  <h1>Main functionality</h3>
+  <span id="text">This site allows you to generate custom "Typing keyboard to piano keyboard" layouts for <a href="https://www.image-line.com/fl-studio/">FL Studio</a>.
+  <br>Per default they will be mapped like the default scales (Major, Minor Pentatic, etc). 
+  
+  <h1 id="functionality">How to use</h3>
+  <span id="text">1. Select a scale by either clicking the keys of the note selector, or by manually entering a <u>pitch class set</u>.
+  <br>2. Either download the resulting <u>.scr file</u> or copy the text into your own. 
+  <br>3. The for "Typing to piano" relevant .scr files are stored in your FL Studio installation folder, <b>not</b> your user folder.<br>
+  The default location on Windows should be <span style="background-color: #EFEFEF">C:\Program Files (x86)\Image-Line\FL Studio 21\System\Config\Typing to piano</span>
+  <br>4. Restart FL Studio to see the new scale(s) in your selection. 
+  <br>Tip: You can create sub-folders for better organisations.
+  <h1 id="pitchclass">Pitch Class Set</h3>Any list of numbers from 0-11 within curly brackets {} separated by comma. For example, {0,2,4,5,7,9,11} is the major scale.
+  <h1 id="scrfile">.scr File</h3>
+  A simple plain text file FL Studio uses to associate each key with a note. The folder containing all your default .scr files includes a .txt file describing the layout and available options.
+  </span>
+  <h1 class="trueh1" id="about" >about the site:</h1> 
+  <span id="text">Last Update: 20/05/2023<br>
+  <a href="https://github.com/underscoreraven/underscoreraven.github.io">Link to github repository</a><br>
+  Link to FL Studio forum thread
+  <br><br>The entire site with its scripts is contained in this single .html file. So you can just download it as is and run it locally.
+</div>
+
+  <script>
+
+// NOTE SELECTOR
+    var selectedKeys = [0];
+
+    function selectKey(keyValue) {
+      if (keyValue === 0) {
+        return;
+      }
+
+      var index = selectedKeys.indexOf(keyValue);
+
+      if (index === -1) {
+        selectedKeys.push(keyValue);
+      } else {
+        selectedKeys.splice(index, 1);
+      }
+
+      selectedKeys.sort(function(a, b) {
+        return a - b;
+      });
+
+      updatePiano();
+      updateOutput();
+    }
+
+    function updatePiano() {
+      var keys = document.getElementsByClassName('key');
+
+      for (var i = 0; i < keys.length; i++) {
+        var keyValue = parseInt(keys[i].getAttribute('onclick').match(/\d+/)[0]);
+
+        if (selectedKeys.indexOf(keyValue) !== -1) {
+          keys[i].classList.add('red');
+        } else {
+          keys[i].classList.remove('red');
+        }
+      }
+    }
+
+    function updateOutput() {
+      var output = '{' + selectedKeys.join(',') + '}';
+      document.getElementById('output').value = output;
+	  convertPitchSet(); // CONVERT PITCH SET
+    }
+
+    function handleInput() {
+      var input = document.getElementById('input').value;
+      var regex = /^\{([0-9,\s]*)\}$/;
+
+      if (regex.test(input)) {
+        var values = input
+          .slice(1)
+          .split(',')
+          .map(function(key) {
+            return parseInt(key.trim());
+          })
+          .filter(function(key) {
+            return !isNaN(key);
+          });
+
+        var validInput = values.every(function(key) {
+          return key >= 0 && key <= 11 && !isNaN(key);
+        });
+
+        var containsZero = values.includes(0);
+        var hasDuplicates = new Set(values).size !== values.length;
+
+        if (validInput) {
+          if (containsZero) {
+            if (hasDuplicates) {
+              document.getElementById('info').textContent = 'Duplicate values are not allowed.';
+            } else {
+              selectedKeys = values;
+              selectedKeys.sort(function(a, b) {
+                return a - b;
+              });
+
+              updatePiano();
+              updateOutput();
+              document.getElementById('info').textContent = '';
+            }
+          } else {
+            document.getElementById('info').textContent = 'The pitch class set must contain the number 0.';
+          }
+        } else {
+          document.getElementById('info').textContent = '';
+          selectedKeys = [];
+          updatePiano();
+          updateOutput();
+        }
+      } else {
+        document.getElementById('info').textContent = 'Please enter the pitch class set in the format {0,2,5,...}.';
+      }
+    convertPitchSet(); // CONVERT PITCH SET
+	}
+
+    // Select the "C" key on page load
+    window.onload = function() {
+      selectKey(0);
+      updatePiano();
+      updateOutput();
+    };
+	
+// PITCH CONVERTER
+
+       function convertPitchSet() {
+           var inputPitchSet = document.getElementById("output").value;
+           var outputPitchSet = document.getElementById("outputPitchSet");
+           // var startNumber = parseInt(document.getElementById("startNumber").value);
+		var startNumber = 7;
+
+           // Extract the pitch values from the input
+           var regex = /(\d+)/g;
+           var pitches = inputPitchSet.match(regex);
+
+           // Check if the pitch set is valid
+           if (!pitches || pitches.some(function(pitch) {
+               return parseInt(pitch) < 0 || parseInt(pitch) > 11;
+           })) {
+               document.getElementById('info').textContent = 'Invalid pitch set. Please enter valid numbers between 0 and 11 separated by commas.';
+               return;
+           }
+
+           var totalLength = 52; // Total number of lines
+
+           // Map the pitch set to piano keys with numbering
+           var pianoKeys = pitches.map(function(pitch) {
+               var note = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
+               return note[parseInt(pitch)];
+           });
+
+           // Generate the output pitch set
+	var sequence = [];
+for (var i = 0; i < totalLength; i++) {
+    var currentNumber;
+    switch (true) {
+        case (i < 12):
+            currentNumber = startNumber + Math.floor(i / pitches.length);
+            sequence.push(pianoKeys[i % pitches.length] + currentNumber);
+            break;
+        case (i >= 14 && i < 26):
+            currentNumber = startNumber - 1 + Math.floor((i - 14) / pitches.length);
+            sequence.push(pianoKeys[(i - 14) % pitches.length] + currentNumber);
+            break;
+        case (i >= 28 && i < 39):
+            currentNumber = startNumber - 2 + Math.floor((i - 28) / pitches.length);
+            sequence.push(pianoKeys[(i - 28) % pitches.length] + currentNumber);
+            break;
+        case (i >= 42 && i < 53):
+            currentNumber = startNumber - 3 + Math.floor((i - 42) / pitches.length);
+            sequence.push(pianoKeys[(i - 42) % pitches.length] + currentNumber);
+            break;
+        case (i === 39 || i === 42):
+            sequence.push("FREE");
+            break;
+        case (i === 43):
+            sequence.push(pianoKeys[0] + (startNumber + Math.floor(i / pitches.length)));
+            break;
+        default:
+            sequence.push("FREE");
+            break;
+    }
+}
+
+
+            outputPitchSet.value = sequence.join("\n");
+        }
+		
+// DOWNLOADER 
+
+function downloadTextFile() {
+    var text = document.getElementById("outputPitchSet").value;
+    var element = document.createElement("a");
+    var file = new Blob([text], {type: 'text/plain'});
+    element.href = URL.createObjectURL(file);
+    element.download = "Scale.scr";
+    document.body.appendChild(element);
+    element.click();
+}
+
+function copyToClipboard() {
+    var text = document.getElementById("outputPitchSet").value;
+    navigator.clipboard.writeText(text)
+        .then(function() {
+            alert("Text copied to clipboard!");
+        })
+        .catch(function(error) {
+            console.error("Error copying text: ", error);
+        });
+}
+</script>
+</body>
+</html>
