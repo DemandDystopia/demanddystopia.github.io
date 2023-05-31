@@ -85,10 +85,11 @@
 	<a href="#note selector" class="sidebarlink">note selector</a><br>
     <a href="#scroutput" class="sidebarlink">scr output</a><br>
 	<a href="#about" class="sidebarlink">about</a><br>
-	<span>What is..</span><br>
-	<a href="#functionality" class="sidebarlink">this site</a><br>
-	<a href="#pitchclass" class="sidebarlink">a pitch class set</a><br>
-	<a href="#scrfile" class="sidebarlink">a .scr file</a><br>
+	<span>About</span><br>
+	<a href="#functionality" class="sidebarlink">the site</a><br>
+	<a href="#usage" class="sidebarlink">usage<a/><br>
+	<a href="#pitchclass" class="sidebarlink">pitch class set</a><br>
+	<a href="#scrfile" class="sidebarlink">.scr file</a><br>
 
 	<span>Helpful sites:</span><br>
 	<a href="https://ianring.com/musictheory/">ianring.com</a>
@@ -129,26 +130,32 @@
   
   <hr>
 
-  <h1>Main functionality</h3>
-  <span id="text">This site allows you to generate custom "Typing keyboard to piano keyboard" layouts for <a href="https://www.image-line.com/fl-studio/">FL Studio</a>.
-  <br>Per default they will be mapped like the default scales (Major, Minor Pentatic, etc). 
-  
-  <h1 id="functionality">How to use</h3>
-  <span id="text">1. Select a scale by either clicking the keys of the note selector, or by manually entering a <u>pitch class set</u>.
-  <br>2. Either download the resulting <u>.scr file</u> or copy the text into your own. 
-  <br>3. The for "Typing to piano" relevant .scr files are stored in your FL Studio installation folder, <b>not</b> your user folder.<br>
-  The default location on Windows should be <span style="background-color: #EFEFEF">C:\Program Files (x86)\Image-Line\FL Studio 21\System\Config\Typing to piano</span>
-  <br>4. Restart FL Studio to see the new scale(s) in your selection. 
-  <br>Tip: You can create sub-folders for better organisations.
-  <h1 id="pitchclass">Pitch Class Set</h3>Any list of numbers from 0-11 within curly brackets {} separated by comma. For example, {0,2,4,5,7,9,11} is the major scale.
-  <h1 id="scrfile">.scr File</h3>
-  A simple plain text file FL Studio uses to associate each key with a note. The folder containing all your default .scr files includes a .txt file describing the layout and available options.
-  </span>
-  <h1 class="trueh1" id="about" >about the site:</h1> 
-  <span id="text">Last Update: 20/05/2023<br>
-  <a href="https://github.com/underscoreraven/underscoreraven.github.io">Link to github repository</a><br>
-  Link to FL Studio forum thread
-  <br><br>The entire site with its scripts is contained in this single .html file. So you can just download it as is and run it locally.
+<h1 id="functionality">Main functionality</h3>
+<span id="text">This site allows you to generate custom "Typing keyboard to piano keyboard" layouts for <a href="https://www.image-line.com/fl-studio/">FL Studio</a>.
+ <br>Per default they will be mapped like the default scales (Major, Minor Pentatic, etc). 
+ 
+ <!--<a href="https://github.com/demanddystopia/demanddystopia.github.io/scr">Link to github repository</a><br>
+ Link to FL Studio forum thread-->
+ <br><br>The entire site with its scripts is contained in this single .html file. So that you could just download it as is and run it locally.
+
+<h1 id="usage">How to use</h3>
+ <span id="text">1. Select a scale by either clicking the keys of the note selector, or by manually entering a <a href="#pitchclass">pitch class set</a>.
+ <br>2. Either download the resulting <a href="#scrfile">.scr</a> file or copy the text into your own. 
+ <br>3. The for "Typing to piano" relevant <a href="#scrfile">.scr</a> files are stored in your FL Studio installation folder, <b>not</b> your user folder.<br>
+ The default location on Windows should be <span style="background-color: #EFEFEF">C:\Program Files (x86)\Image-Line\FL Studio 21\System\Config\Typing to piano</span>
+ <br>4. Restart FL Studio to see the new scale(s) in your selection. 
+ <br>Tip: You can create sub-folders for better organisation.
+
+<h1 id="pitchclass">Pitch Class Set</h3>Any list of numbers from 0-11 within curly brackets {} separated by comma. For example, {0,2,4,5,7,9,11} is the major scale.
+ <br>Based on musical set theory, see <a href="https://en.wikipedia.org/wiki/Set_theory_(music)">Wikipedia</a> as a starting point for more.
+
+<h1 id="scrfile">.scr File</h3>
+ A simple <a href="https://en.wikipedia.org/wiki/Plain_text">plain text</a> file FL Studio uses to associate each key with a note. The folder containing all your default .scr files includes a .txt file describing the layout and available options.
+ <br>
+<hr>
+ <span id="text">Last Update: 31/05/2023<br> </span>
+
+
 </div>
 
   <script>
