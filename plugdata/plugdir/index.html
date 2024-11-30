@@ -8,12 +8,19 @@
       :root {
         --row-color-even: #FAFAFA;;
         --row-color-odd: #E1E1E1;
+
       }
-      
+      @font-face {
+        font-family: 'IBMPlexMono';
+        src: url('fonts/IBMPlexMono-Text-Latin1.woff') format('woff');
+      }
+
+
       body { background-color: #ffffff;
-        font-family: monospace;
-        font-size: 120%;
-      }      
+        font-family: "IBMPlexMono", monospace;
+        font-feature-settings:"ss02" 1, "ss03" 1, "ss05" 1, "ss06" 1;
+        }
+
 
       div {
        margin-left:auto;
@@ -52,6 +59,7 @@
         color: #007AFF;
       }
       
+      
       #paid {
         color: #FF8500;
       }
@@ -77,323 +85,468 @@
         content: "↓ ";
         color: #FAFAFA;
       }
+
+      #state_Yes::first-letter, #state_likely::first-letter { 
+        color: #00A900;
+      }
+      #state_partial::first-letter {
+        color: #FF8500;
+      }
+
+      #state_unlikely::first-letter, #state_no::first-letter {
+        color:#CE0000;
+      }
+      #state_unknown::first-letter {
+       color: #A500CE;
+      }
       
-      
+      #state_Yes::after { 
+        content:" Yes";
+      }
+      #state_likely::after { 
+        content:" Likely";
+      }
+      #state_partial::after {
+        content:" Partial";
+      }
+
+      #state_unlikely::after{
+        content:" Unlikely";
+      }
+      #state_no::after {
+        content:" No";
+      }
+      #state_unknown::after {
+       content:" Unknown";
+      }
+
       </style>
 </head>
-<body onload="sortTable(0)">
+<body>
 <div id="centered">
-<input type="text" id="myInput" onkeyup="filterTable()" placeholder="Filter any column">
+<input type="text" id="myInput" onkeyup="searchTable()" placeholder="Filter any column">
 
 <table id="myTable">
   <tr>
-      <th onclick="sortTable(0)">Name</th>
-      <th onclick="sortTable(1)">Author</th>
-      <th onclick="sortTable(2)">State</th>
-      <th onclick="sortTable(3)">Link</th>
-      <th onclick="sortTable(4)">Type</th>
+    <th onclick="sortTable(0)">Release Date</th>
+    <th onclick="sortTable(1)">Name</th>
+    <th onclick="sortTable(2)">Author</th>
+    <th onclick="sortTable(3)">Cost</th>
+    <th onclick="sortTable(4)">Link</th>
+    <th onclick="sortTable(5)">Type</th>
+    <th onclick="sortTable(6)">param/daw_storage</th>
+  </tr>
+  <tr>
+    <td>2024-11-29</td>
+    <td>Data Sampler</td>
+    <td>Tadej Supukovic</td>
+    <td id="free">Free</td>
+    <td><a href="https://tdspkaudio.gumroad.com/l/datasampler?layout=profile">Gumroad</a></td>
+    <td>Generator</td>
+    <td id="state_partial">2</td>
+  </tr>
+  <tr>
+    <td>2024-11-27</td>
+    <td>GS77</td>
+    <td>Knaps</td>
+    <td id="paid">Paid</td>
+    <td><a href="https://www.patreon.com/posts/gs77-full-116821234">Patreon</a></td>
+    <td>Generator</td>
+    <td id="state_unknown">3</td>
+  </tr>
+  <tr>
+    <td>2024-11-26</td>
+    <td>Disperse-X</td>
+    <td>ORU</td>
+    <td id="free">Free</td>
+    <td><a href="https://oruaudio.gumroad.com/l/disperse-x">Gumroad</a></td>
+    <td>Effect</td>
+    <td id="state_Yes">0</td>
+  </tr>
+  <tr>
+    <td>2024-11-22</td>
+    <td>EB-FreakyTable</td>
+    <td>Ewan Bristow</td>
+    <td id="free">Free</td>
+    <td><a href="https://ewanbristow.gumroad.com/l/freakytable">Gumroad</a></td>
+    <td>Effect</td>
+    <td id="state_Yes">0</td>
+  </tr>
+  <tr>
+    <td>2024-11-19</td>
+    <td>HOLO-106</td>
+    <td>ORU</td>
+    <td id="paid">Paid</td>
+    <td><a href="https://oruaudio.gumroad.com/l/holo106">Gumroad</a>, <a href="https://oruaudio.gumroad.com/l/retropalette?layout=profile">Bundle</a></td>
+    <td>Effect</td>
+    <td id="state_Yes">0</td>
+  </tr>
+  <tr>
+    <td>2024-11-19</td>
+    <td>HOLO-106 Lite</td>
+    <td>ORU</td>
+    <td id="free">Free</td>
+    <td><a href="https://oruaudio.gumroad.com/l/holo106lite">Gumroad</a></td>
+    <td>Effect</td>
+    <td id="state_likely">1</td>
+  </tr>
+  <tr>
+    <td>2024-11-19</td>
+    <td>PureCLIP</td>
+    <td>ORU</td>
+    <td id="free">Free</td>
+    <td><a href="https://oruaudio.gumroad.com/l/pureclip">Gumroad</a></td>
+    <td>Effect</td>
+    <td id="state_Yes">0</td>
+  </tr>
+  <tr>
+    <td>2024-11-19</td>
+    <td>T4-PE</td>
+    <td>ORU</td>
+    <td id="paid">Paid</td>
+    <td><a href="https://oruaudio.gumroad.com/l/t4pe">Gumroad</a>, <a href="https://oruaudio.gumroad.com/l/retropalette?layout=profile">Bundle</a></td>
+    <td>Effect</td>
+    <td id="state_Yes">0</td>
+  </tr>
+  <tr>
+    <td>2024-11-19</td>
+    <td>T4-PE Lite</td>
+    <td>ORU</td>
+    <td id="free">Free</td>
+    <td><a href="https://oruaudio.gumroad.com/l/t4pelite">Gumroad</a></td>
+    <td>Effect</td>
+    <td id="state_likely">1</td>
+  </tr>
+  <tr>
+    <td>2024-11-16</td>
+    <td>QWERTY-Beats</td>
+    <td>jimfrize</td>
+    <td id="free">Free</td>
+    <td><a href="https://github.com/jimfrize/qwerty-beats">Github</a></td>
+    <td>Generator</td>
+    <td id="state_unknown">3</td>
+  </tr>
+  <tr>
+    <td>2024-11-14</td>
+    <td>Florah(LITE)</td>
+    <td>Ewan Bristow</td>
+    <td id="free">Free</td>
+    <td><a href="https://ewanbristow.gumroad.com/l/FlorahLITE">Gumroad</a></td>
+    <td>Effect</td>
+    <td id="state_Yes">0</td>
+  </tr>
+  <tr>
+    <td>2024-11-12</td>
+    <td>Florah</td>
+    <td>Ewan Bristow</td>
+    <td id="paid">Paid</td>
+    <td><a href="https://ewanbristow.gumroad.com/l/Florah">Gumroad</a> <a href="https://www.patreon.com/user?u=47612738">Patreon</a></td>
+    <td>Effect</td>
+    <td id="state_Yes">0</td>
+  </tr>
+  <tr>
+    <td>2024-11-09</td>
+    <td>N-SUB</td>
+    <td>Nasko</td>
+    <td id="paid">Paid</td>
+    <td><a href="https://www.patreon.com/posts/n-sub-plugdata-115682326">Patreon</a></td>
+    <td>Generator/Effect</td>
+    <td id="state_likely">1</td>
+  </tr>
+  <tr>
+    <td>2024-11-05</td>
+    <td>EB-SpectraVeil</td>
+    <td>Ewan Bristow</td>
+    <td id="free">Free</td>
+    <td><a href="https://ewanbristow.gumroad.com/l/spectraveil">Gumroad</a></td>
+    <td>Effect</td>
+    <td id="state_partial">2</td>
+  </tr>
+  <tr>
+    <td>2024-11-04</td>
+    <td>SGate</td>
+    <td>Knaps</td>
+    <td id="free">Free</td>
+    <td><a href="https://www.patreon.com/posts/sgate-free-for-115304470">Patreon</a></td>
+    <td>Generator</td>
+    <td id="state_no">5</td>
+  </tr>
+  <tr>
+    <td>2024-10-27</td>
+    <td>Bitmorph</td>
+    <td>-LightningPig</td>
+    <td id="free">Free</td>
+    <td><a href="https://lightningpig.gumroad.com/l/bitmorph">Github</td>
+    <td>Effect</td>
+    <td>Bugged</td>
+  </tr>
+  <tr>
+    <td>2024-10-22</td>
+    <td>Corruption Crusher</td>
+    <td>-LightningPig</td>
+    <td id="free">Free</td>
+    <td><a href="https://lightningpig.gumroad.com/l/Corruptioncrusher">Gumroad</a></td>
+    <td>Effect</td>
+    <td id="state_Yes">0</td>
+  </tr>
+  <tr>
+    <td>2024-10-18</td>
+    <td>coarsedelay (free)</td>
+    <td>zeff</td>
+    <td id="free">Free</td>
+    <td><a href="https://payhip.com/b/UPhVE">Payhip</a></td>
+    <td>Effect</td>
+    <td id="state_unknown">3</td>
+  </tr>
+  <tr>
+    <td>2024-10-18</td>
+    <td>coarsedelay (full)</td>
+    <td>zeff</td>
+    <td id="paid">Paid</td>
+    <td><a href="https://payhip.com/b/UPhVE">Payhip</a></td>
+    <td>Effect</td>
+    <td id="state_unknown">3</td>
+  </tr>
+  <tr>
+    <td>2024-10-18</td>
+    <td>RBLD POLYSHIFTER</td>
+    <td>RBLD Audio</td>
+    <td id="paid">Paid</td>
+    <td><a href="https://rbldaudio.gumroad.com/l/polyshifter">Gumroad</a></td>
+    <td>Effect</td>
+    <td id="state_unknown">3</td>
+  </tr>
+  <tr>
+    <td>2024-10-18</td>
+    <td>mulekick</td>
+    <td>Sound Codex</td>
+    <td id="free">Free</td>
+    <td><a href="https://www.patreon.com/posts/free-kick-plugin-114234438">Patreon</a></td>
+    <td>Generator</td>
+    <td id="state_no">5</td>
+  </tr>
+  <tr>
+    <td>2024-10-13</td>
+    <td>SpectralArrayMod</td>
+    <td>Knaps</td>
+    <td id="paid">Paid</td>
+    <td><a href="https://www.patreon.com/posts/spectral-array-113919514">Patreon</a></td>
+    <td>Effect</td>
+    <td id="state_unknown">3</td>
+  </tr>
+  <tr>
+    <td>2024-10-12</td>
+    <td>EB-Blasphemy</td>
+    <td>Ewan Bristow</td>
+    <td id="free">Free</td>
+    <td><a href="https://ewanbristow.gumroad.com/l/Florah">Gumroad</a> <a href="https://www.patreon.com/user?u=47612738">Patreon</a></td>
+    <td>Generator</td>
+    <td id="state_Yes">0</td>
+  </tr>
+  <tr>
+    <td>2024-10-07</td>
+    <td>cyberdrum</td>
+    <td>Sound Codex</td>
+    <td id="paid">Paid</td>
+    <td><a href="https://www.patreon.com/posts/cyberdrum-v1-0-0-113553292">Patreon</a></td>
+    <td>Generator</td>
+    <td id="state_unlikely">4</td>
+  </tr>
+  <tr>
+    <td>2024-09-28</td>
+    <td>N-SPEC GATE</td>
+    <td>Nasko</td>
+    <td id="paid">Paid</td>
+    <td><a href="https://www.patreon.com/posts/n-spec-gate-fx-112905340">Patreon</a></td>
+    <td>Effect</td>
+    <td id="state_likely">1</td>
+  </tr>
+  <tr>
+    <td>2024-09-22</td>
+    <td>the gusher</td>
+    <td>(un)familiar.</td>
+    <td id="free">Free</td>
+    <td><a href="https://unfamiliartunes.gumroad.com/l/the-gusher">Gumroad</a></td>
+    <td>Effect</td>
+    <td id="state_unknown">3</td>
+  </tr>
+  <tr>
+    <td>2024-09-21</td>
+    <td>photosynthesis</td>
+    <td>Sound Codex</td>
+    <td id="free">Free</td>
+    <td><a href="https://www.patreon.com/posts/free-botanica-v1-112494633">Patreon</a></td>
+    <td>Generator</td>
+    <td id="state_unlikely">4</td>
+  </tr>
+  <tr>
+    <td>2024-09-15</td>
+    <td>wasteland</td>
+    <td>Sound Codex</td>
+    <td id="paid">Paid</td>
+    <td><a href="https://www.patreon.com/posts/wasteland-v1-0-1-112121744">Patreon</a></td>
+    <td>Generator</td>
+    <td id="state_unlikely">4</td>
+  </tr>
+  <tr>
+    <td>2024-09-06</td>
+    <td>EB-Morph</td>
+    <td>Ewan Bristow</td>
+    <td id="free">Free</td>
+    <td><a href="https://ewanbristow.gumroad.com/l/rrsdkv">Gumroad</a></td>
+    <td>Effect</td>
+    <td id="state_Yes">0</td>
+  </tr>
+  <tr>
+    <td>2024-08-24</td>
+    <td>N-PHASE SHIFT</td>
+    <td>Nasko</td>
+    <td id="free">Free</td>
+    <td><a href="https://www.patreon.com/posts/n-phase-shift-fx-110714959">Patreon</a></td>
+    <td>Effect</td>
+    <td id="state_likely">1</td>
+  </tr>
+  <tr>
+    <td>2024-08-23</td>
+    <td>spectralsand2</td>
+    <td>(un)familiar.</td>
+    <td id="paid">Paid</td>
+    <td><a href="https://unfamiliartunes.gumroad.com/l/spectralsand">Gumroad</a></td>
+    <td>Effect</td>
+    <td id="state_unknown">3</td>
+  </tr>
+  <tr>
+    <td>2024-08-20</td>
+    <td>tapedelay</td>
+    <td>Sound Codex</td>
+    <td id="paid">Paid</td>
+    <td><a href="https://www.patreon.com/posts/tapedelay-v1-4-0-110438245">Patreon</a></td>
+    <td>Effect</td>
+    <td id="state_unlikely">4</td>
+  </tr>
+  <tr>
+    <td>2024-08-19</td>
+    <td>EB-SpectralSquish</td>
+    <td>Ewan Bristow</td>
+    <td id="free">Free</td>
+    <td><a href="https://ewanbristow.gumroad.com/l/SpectralSquish">Gumroad</a></td>
+    <td>Effect</td>
+    <td id="state_Yes">0</td>
+  </tr>
+  <tr>
+    <td>2024-08-18</td>
+    <td>N-SPEC COMP LITE</td>
+    <td>Nasko</td>
+    <td id="paid">Paid</td>
+    <td><a href="https://www.patreon.com/posts/n-spec-comp-lite-110333394">Patreon</a></td>
+    <td>Effect</td>
+    <td id="state_likely">1</td>
+  </tr>
+  <tr>
+    <td>2024-08-07</td>
+    <td>EB-Resonator</td>
+    <td>Ewan Bristow</td>
+    <td id="free">Free</td>
+    <td><a href="https://ewanbristow.gumroad.com/l/EBResonator">Gumroad</a></td>
+    <td>Effect</td>
+    <td id="state_Yes">0</td>
+  </tr>
+  <tr>
+    <td>2024-08-05</td>
+    <td>Daedalus</td>
+    <td>Sound Codex</td>
+    <td id="paid">Paid</td>
+    <td><a href="https://www.patreon.com/posts/daedalus-v1-0-2-109511951">Patreon</a></td>
+    <td>Generator</td>
+    <td id="state_unlikely">4</td>
+  </tr>
+  <tr>
+    <td>2024-08-02</td>
+    <td>EB-SpectralGate</td>
+    <td>Ewan Bristow</td>
+    <td id="free">Free</td>
+    <td><a href="https://ewanbristow.gumroad.com/l/SpectralGate">Gumroad</a></td>
+    <td>Effect</td>
+    <td id="state_partial">2</td>
+  </tr>
+  <tr>
+    <td>2024-07-17</td>
+    <td>N-SLoMo</td>
+    <td>Nasko</td>
+    <td id="free">Free</td>
+    <td><a href="https://www.patreon.com/posts/n-slomo-plugdata-106385744">Patreon</a></td>
+    <td>Effect</td>
+    <td id="state_likely">1</td>
+  </tr>
+  <tr>
+    <td>2024-07-06</td>
+    <td>Seq-1</td>
+    <td>Sound Codex</td>
+    <td id="paid">Paid</td>
+    <td><a href="https://www.patreon.com/posts/seq-1-patch-107603506">Patreon</a></td>
+    <td >Unknown</td>
+    <td id="state_unlikely">4</td>
+  </tr>
+  <tr>
+    <td>2024-06-11</td>
+    <td>EB-DynamicAllPass</td>
+    <td>Ewan Bristow</td>
+    <td id="paid">Paid</td>
+    <td><a href="https://ewanbristow.gumroad.com/l/Florah">Gumroad</a> <a href="https://www.patreon.com/user?u=47612738">Patreon</a></td>
+    <td>Effect</td>
+    <td id="state_Yes">0</td>
+  </tr>
+  <tr>
+    <td>2024-06-04</td>
+    <td>N-SPEC CLIP</td>
+    <td>Nasko</td>
+    <td id="paid">Paid</td>
+    <td><a href="https://www.patreon.com/posts/n-spec-clip-fx-105527346">Patreon</a></td>
+    <td>Effect</td>
+    <td id="state_likely">1</td>
+  </tr>
+  <tr>
+    <td>2024-05-19</td>
+    <td>ChameleonX</td>
+    <td>Ewan Bristow</td>
+    <td id="paid">Paid</td>
+    <td><a href="https://ewanbristow.gumroad.com/l/chameleonxbeta, https://www.patreon.com/user?u=47612738">Gumroad, Patreon</a></td>
+    <td>Effect</td>
+    <td id="state_Yes">0</td>
+  </tr>
+  <tr>
+    <td>2024-05-05</td>
+    <td>N-SPEC COMP</td>
+    <td>Nasko</td>
+    <td id="paid">Paid</td>
+    <td><a href="https://www.patreon.com/posts/n-spec-comp-fx-103688179">Patreon</a></td>
+    <td>Effect</td>
+    <td id="state_likely">1</td>
+  </tr>
+  <tr>
+    <td>2024-03-24</td>
+    <td>N-SPECTRAL MASK</td>
+    <td>Nasko</td>
+    <td id="paid">Paid</td>
+    <td><a href="https://www.patreon.com/posts/n-spectral-mask-100980671">Patreon</a></td>
+    <td>Effect</td>
+    <td id="state_likely">1</td>
+  </tr>
+  <tr>
+    <td>2023-02-24</td>
+    <td>NEGAN GEWEALD</td>
+    <td>Orgeldream</td>
+    <td id="free">Free</td>
+    <td><a href="https://orgeldream.gumroad.com/l/negangeweald">Gumroad</a></td>
+    <td>Effect</td>
+    <td id="state_unknown">3</td>
+  </tr>
+  </table>
 
-  </tr>
-  <tr>
-      <td>EB-FreakyTable</td>
-      <td>Ewan Bristow</td>
-      <td id="free">Free</td>
-      <td><a href="https://ewanbristow.gumroad.com/l/freakytable"">Gumroad</a></td>
-      <td>Effect</td>
-      
-  </tr>
-  <tr>
-      <td>Florah(LITE)</td>
-      <td>Ewan Bristow</td>
-      <td id="free">Free</td>
-      <td><a href="https://ewanbristow.gumroad.com/l/FlorahLITE">Gumroad</a></td>
-      <td>Effect</td>
-      
-  </tr>
-  <tr>
-      <td>EB-SpectraVeil</td>
-      <td>Ewan Bristow</td>
-      <td id="free">Free</td>
-      <td><a href="https://ewanbristow.gumroad.com/l/spectraveil">Gumroad</a></td>
-      <td>Effect</td>
-      
-  </tr>
-  <tr>
-      <td>EB-Blasphemy</td>
-      <td>Ewan Bristow</td>
-      <td id="free">Free</td>
-      <td><a href="https://ewanbristow.gumroad.com/l/Blasphemy">Gumroad</a></td>
-      <td>Generator</td>
-      
-  </tr>
-  <tr>
-      <td>EB-Morph</td>
-      <td>Ewan Bristow</td>
-      <td id="free">Free</td>
-      <td><a href="https://ewanbristow.gumroad.com/l/rrsdkv">Gumroad</a></td>
-      <td>Effect</td>
-      
-  </tr>
-  <tr>
-      <td>Florah</td>
-      <td>Ewan Bristow</td>
-      <td id="paid">Paid</td>
-      <td><a href="https://ewanbristow.gumroad.com/l/Florah">Gumroad</a>, <a href="https://www.patreon.com/user?u=47612738">Patreon</a></td>
-      <td>Effect</td>
-
-  </tr>
-  <tr>
-      <td>EB-SpectralSquish</td>
-      <td>Ewan Bristow</td>
-      <td id="free">Free</td>
-      <td><a href="https://ewanbristow.gumroad.com/l/SpectralSquish">Gumroad</a></td>
-      <td>Effect</td>
-      
-  </tr>
-  <tr>
-      <td>EB-Resonator</td>
-      <td>Ewan Bristow</td>
-      <td id="free">Free</td>
-      <td><a href="https://ewanbristow.gumroad.com/l/EBResonator">Gumroad</a></td>
-      <td>Effect</td>
-      
-  </tr>
-  <tr>
-      <td>EB-SpectralGate</td>
-      <td>Ewan Bristow</td>
-      <td id="free">Free</td>
-      <td><a href="https://ewanbristow.gumroad.com/l/SpectralGate">Gumroad</a></td>
-      <td>Effect</td>
-  </tr>
-  <tr>
-      <td>EB-DynamicAllPass</td>
-      <td>Ewan Bristow</td>
-      <td id="paid">Paid</td>
-      <td><a href="https://ewanbristow.gumroad.com/l/EB-DynamicAllPass">Gumroad</a>, <a href="https://www.patreon.com/user?u=47612738">Patreon</a></td>
-      <td>Effect</td>
-
-  </tr>
-  <tr>
-      <td>ChameleonX</td>
-      <td>Ewan Bristow</td>
-      <td id="paid">Paid</td>
-      <td><a href="https://ewanbristow.gumroad.com/l/chameleonxbeta">Gumroad</a>, <a href="https://www.patreon.com/user?u=47612738">Patreon</a></td>
-      <td>Effect</td>
-
-  </tr>
-  <tr>
-      <td>N-SUB</td>
-      <td>Nasko</td>
-      <td id="paid">Paid</td>
-      <td><a href="https://www.patreon.com/posts/n-sub-plugdata-115682326">Patreon</a></td>
-      <td>Effect</td>
-  </tr>
-  <tr>
-      <td>N-SPEC GATE</td>
-      <td>Nasko</td>
-      <td id="paid">Paid</td>
-      <td><a href="https://www.patreon.com/posts/n-spec-gate-fx-112905340">Patreon</a></td>
-      <td>Effect</td>
-  </tr>
-  <tr>
-      <td>N-PHASE SHIFT</td>
-      <td>Nasko</td>
-      <td id="free">Free</td>
-      <td><a href="https://www.patreon.com/posts/n-phase-shift-fx-110714959">Patreon</a></td>
-      <td>Effect</td>
-  </tr>
-  <tr>
-      <td>N-SPEC COMP LITE</td>
-      <td>Nasko</td>
-      <td id="paid">Paid</td>
-      <td><a href="https://www.patreon.com/posts/n-spec-comp-lite-110333394">Patreon</a></td>
-      <td>Effect</td>
-  </tr>
-  <tr>
-      <td>N-SLoMo</td>
-      <td>Nasko</td>
-      <td id="free">Free</td>
-      <td><a href="https://www.patreon.com/posts/n-slomo-plugdata-106385744">Patreon</a></td>
-      <td>Effect</td>
-  </tr>
-  <tr>
-      <td>N-SPEC CLIP</td>
-      <td>Nasko</td>
-      <td id="paid">Paid</td>
-      <td><a href="https://www.patreon.com/posts/n-spec-clip-fx-105527346">Patreon</a></td>
-      <td>Effect</td>
-  </tr>
-  <tr>
-      <td>N-SPEC COMP</td>
-      <td>Nasko</td>
-      <td id="paid">Paid</td>
-      <td><a href="https://www.patreon.com/posts/n-spec-comp-fx-103688179">Patreon</a></td>
-      <td>Effect</td>
-  </tr>
-  <tr>
-      <td>N-SPECTRAL MASK</td>
-      <td>Nasko</td>
-      <td id="paid">Paid</td>
-      <td><a href="https://www.patreon.com/posts/n-spectral-mask-100980671">Patreon</a></td>
-      <td>Effect</td>
-  </tr>
-  <tr>
-      <td>T4-PE</td>
-      <td>ORU</td>
-      <td id="paid">Paid</td>
-      <td><a href="https://oruaudio.gumroad.com/l/t4pe">Gumroad</a></td>
-      <td>Effect</td>
-      
-  </tr>
-  <tr>
-      <td>T4-PE Lite</td>
-      <td>ORU</td>
-      <td id="free">Free</td>
-      <td><a href="https://oruaudio.gumroad.com/l/t4pelite">Gumroad</a></td>
-      <td>Effect</td>
-  </tr>
-  <tr>
-      <td>HOLO-106</td>
-      <td>ORU</td>
-      <td id="paid">Paid</td>
-      <td><a href="https://oruaudio.gumroad.com/l/holo106">Gumroad</a></td>
-      <td>Effect</td>
-      
-  </tr>
-  <tr>
-      <td>HOLO-106 Lite</td>
-      <td>ORU</td>
-      <td id="free">Free</td>
-      <td><a href="https://oruaudio.gumroad.com/l/holo106lite">Gumroad</a></td>
-      <td>Effect</td>
-  </tr>
-  <tr>
-      <td>PureCLIP</td>
-      <td>ORU</td>
-      <td id="free">Free</td>
-      <td><a href="https://oruaudio.gumroad.com/l/pureclip">Gumroad</a></td>
-      <td>Effect</td>
-      
-  </tr>
-  <tr>
-      <td>Disperse-X</td>
-      <td>ORU</td>
-      <td id="free">Free</td>
-      <td><a href="https://oruaudio.gumroad.com/l/disperse-x">Gumroad</a></td>
-      <td>Effect</td>
-      
-  </tr>
-  <tr>
-      <td>coarsedelay (free version)</td>
-      <td>zeff</td>
-      <td id="free">Free</td>
-      <td><a href="https://payhip.com/b/UPhVE">Payhip</a></td>
-      <td>Effect</td>
-  </tr>
-  <tr>
-      <td>coarsedelay (full version)</td>
-      <td>zeff</td>
-      <td id="paid">Paid</td>
-      <td><a href="https://payhip.com/b/UPhVE">Payhip</a></td>
-      <td>Effect</td>
-  </tr>
-  <tr>
-      <td>SGate</td>
-      <td>Knaps</td>
-      <td id="free">Free</td>
-      <td><a href="https://www.patreon.com/posts/sgate-free-for-115304470">Patreon</a></td>
-      <td>Effect</td>
-      
-  </tr>
-  <tr>
-      <td>SpectralArrayMod</td>
-      <td>Knaps</td>
-      <td id="paid">Paid</td>
-      <td><a href="https://www.patreon.com/posts/spectral-array-113919514">Patreon</a></td>
-      <td>Effect</td>
-
-  </tr>
-  <tr>
-      <td>photosynthesis</td>
-      <td>Sound Codex</td>
-      <td id="free">Free</td>
-      <td><a href="https://www.patreon.com/posts/free-botanica-v1-112494633">Patreon</a></td>
-      <td>Generator</td>
-
-  </tr>
-  <tr>
-      <td>wasteland</td>
-      <td>Sound Codex</td>
-      <td id="paid">Paid</td>
-      <td><a href="https://www.patreon.com/posts/wasteland-v1-0-1-112121744">Patreon</a></td>
-      <td>Generator</td>
-  </tr>
-  <tr>
-      <td>Daedalus</td>
-      <td>Sound Codex</td>
-      <td id="paid">Paid</td>
-      <td><a href="https://www.patreon.com/posts/daedalus-v1-0-2-109511951">Patreon</a></td>
-      <td>Generator</td>
-
-  </tr>
-  <tr>
-      <td>cyberdrum</td>
-      <td>Sound Codex</td>
-      <td id="paid">Paid</td>
-      <td><a href="https://www.patreon.com/posts/cyberdrum-v1-0-0-113553292">Patreon</a></td>
-      <td>Generator</td>
-
-  </tr>
-  <tr>
-      <td>mulekick</td>
-      <td>Sound Codex</td>
-      <td id="free">Free</td>
-      <td><a href="https://www.patreon.com/posts/free-kick-plugin-114234438">Patreon</a></td>
-      <td>Generator</td>
-      
-  </tr>
-  <tr>
-      <td>spectralsand2</td>
-      <td>(un)familiar.</td>
-      <td id="paid">Paid</td>
-      <td><a href="https://unfamiliartunes.gumroad.com/l/spectralsand">Gumroad</a></td>
-      <td>Effect</td>
-      
-  </tr>
-  <tr>
-      <td>the gusher</td>
-      <td>(un)familiar.</td>
-      <td id="free">Free</td>
-      <td><a href="https://unfamiliartunes.gumroad.com/l/the-gusher">Gumroad</a></td>
-      <td>Effect</td>
-  </tr>
-  <tr>
-      <td>RBLD POLYSHIFTER</td>
-      <td>RBLD Audio</td>
-      <td id="paid">Paid</td>
-      <td><a href="https://rbldaudio.gumroad.com/l/polyshifter">Gumroad</a></td>
-      <td>Effect</td>
-      
-  </tr>
-  <tr>
-      <td>Corruption Crusher</td>
-      <td>-LightningPig</td>
-      <td id="free">Free</td>
-      <td><a href="https://lightningpig.gumroad.com/l/Corruptioncrusher">Gumroad</a></td>
-      <td>Effect</td>
-      
-  </tr>
-  <tr>
-      <td>Bitmorph</td>
-      <td>-LightningPig</td>
-      <td id="free">Free</td>
-      <td><a href="https://lightningpig.gumroad.com/l/bitmorph">Gumroad</a></td>
-      <td>Effect</td>
-      
-  </tr>
-</table>
+ 
 </div>
-
+<div style="text-align: center;"><p style="font-size: 12px;">Dates may not be 100% accurate right now, Gumroad publishes no release date and patreon displays them via name, and I'm prone to mix that up sometimes.</p>
+<a href="https://github.com/DemandDystopia/demanddystopia.github.io/blob/main/plugdata/plugdir/Plugdir.csv">Direct Link to CSV</a></div>
 <script>
 function sortTable2(n) {
   var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
@@ -527,9 +680,7 @@ function sortTable(n) {
 }
 
 
-
-
-function filterTable() {
+function searchTable() {
   var input = document.getElementById("myInput");
   var filter = input.value.toUpperCase();
   var table = document.getElementById("myTable");
@@ -576,7 +727,21 @@ function colorRows(table) {
   }
 }
 
+function Linkify(inputText) {
+        //URLs starting with http://, https://, or ftp://
+        var replacePattern1 = /(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim;
+        var replacedText = inputText.replace(replacePattern1, '$1" target="_blank">$1</a>');
 
+        //URLs starting with www. (without // before it, or it'd re-link the ones done above)
+        var replacePattern2 = /(^|[^\/])(www\.[\S]+(\b|$))/gim;
+        var replacedText = replacedText.replace(replacePattern2, '$1http://$2" target="_blank">$2</a>');
+
+        //Change email addresses to mailto:: links
+        var replacePattern3 = /(([a-zA-Z0-9_\-\.]+)@[a-zA-Z_]+?(?:\.[a-zA-Z]{2,6}))+/gim;
+        var replacedText = replacedText.replace(replacePattern3, 'mailto:$1">$1</a>');
+
+        return replacedText
+    }
 </script>
 
 </body>
