@@ -1,0 +1,498 @@
+<html>
+<head>
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<sty<html>
+<head>
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+
+
+
+
+@keyframes rotX {
+  0% { transform: rotateX(0);}
+  33% { transform: rotateX(360deg);}
+  66% { transform: rotateX(0);}
+  100% { transform: rotateX(-360deg);}
+}
+
+
+@keyframes rotY {
+  0% { transform: rotateY(0);}
+  33% { transform: rotateY(360deg); }
+  66% { transform: rotateY(0);}
+  100% { transform: rotateY(-360deg)}
+}
+
+
+@keyframes rotZ {
+  0% { transform: rotateZ(0);
+      
+     }
+  33% { transform: rotateZ(360deg);
+        
+      }
+  66% { transform: rotateZ(0);
+        
+        
+      }
+  100% { transform: rotateZ(-360deg);
+         
+       }
+}
+
+@keyframes rotZZ {
+  0% { transform: rotateZ(-360deg); }
+      
+  100% { transform: rotateZ(360deg);
+         
+       }
+}
+
+@keyframes huef {
+  0% { 
+       filter: invert(1) hue-rotate(0)
+     }
+  33% { 
+        filter: invert(1) hue-rotate(360deg);
+      }
+  66% { 
+        filter: invert(1) hue-rotate(0)
+        
+      }
+  100% { 
+         filter: invert(1) hue-rotate(-360deg)
+       }
+}
+
+@keyframes huefi {
+  0% { 
+       filter: invert(1)
+     }
+  100% { 
+         filter: invert(0)
+       }
+}
+
+
+
+ :root, body, button, label {
+color: white;
+background-color: black;
+font-family: monospace !important;
+font-size: 16px; }
+
+
+
+:root {
+
+
+.notes li {
+  opacity: 0;
+  filter: grayscale(1);
+  transition:
+  filter steps(2, jump-none) .5s,
+  opacity steps(3, jump-none) .5s;
+   &#l0 {transition-delay: none}
+   &#l1 {transition-delay:  .1s}
+   &#l2 {transition-delay:  .2s}
+   &#l3 {transition-delay:  .3s}
+   &#l4 {transition-delay:  .4s}
+   &#l5 {transition-delay:  .5s}
+   
+}
+
+*:has(menu > li > input:checked) {
+  :where(div, span, em, section, article) { border: 2px solid var(--alt)}
+  .notes {
+  li {
+    filter: grayscale(0);
+    opacity: 1;
+    }
+    border: none}
+}
+
+ * > *:not(menu, main, .notes, ul,li, del) {
+  
+  transition: outline 1s cubic-bezier(0, 1, 0.58, 1);
+  outline: 20px dashed transparent;
+  
+  &:hover, &:focus {
+    mix-blend-mode: exclusion; 
+    outline: 2px solid var(--accent)}
+
+}
+  .rot {
+  mix-blend-mode: difference;
+    font-size: 2px;
+    width: 10px ;
+    /*width: 32px;*/
+  /* height: 10px; /* <-- for arm*/
+    line-height: .75rem;
+    animation: rotZ 22s alternate infinite ease-in-out;
+    &.X  {animation:
+      rotX 17s alternate infinite ease-in,
+      huef 17s alternate infinite ease-in; } 
+    &.Y  {animation:
+      rotY 13s alternate infinite ease-out,
+      huef 13s alternate infinite ease-out; }
+    &.Z  {animation:
+      rotZ 15s alternate infinite ease-in-out,
+      huef 15s alternate infinite ease-in-out;}
+
+
+    
+    &.A {
+      display: block;
+        }
+    em {
+      color: magenta;
+      background-color: magenta;
+      padding-block: 0rem;
+      &::before, &::after {
+        float: left;
+        content: 'X';
+        opacity: 1;
+        background-color: red;
+        color: red;
+        padding-inline: 1rem;
+        animation: marg 7s ease-in infinite;
+        box-shadow:
+          0 0rem 4rem hsl(from currentcolor h s l / .7);
+      }
+      &::after {
+        
+        float: right;
+    }
+}
+      span > &::before {
+        background-color: cyan;
+        color: red;
+      }
+      span > &::after {
+        background-color: yellow;
+        color: yellow;
+      }
+
+
+        * > &:nth-of-type(1n+3):before {
+      content: 'X';
+      position: absolute;
+      mix-blend-mode: difference;
+      animation: huefi 1s steps(2, jump-none) alternate infinite;
+        }
+  }}
+  
+article {transform: scale(.155); 
+  section {
+
+    /*display: none;*/
+    align-items: center;
+ /*  margin: auto;*/
+    width: 100% !important;
+    height: 1px !important;
+
+
+}
+
+  }
+
+body {
+
+border: 1px solid white;
+
+ }
+menu {
+position: relative;
+border: 1px white solid;
+list-style-type: none;
+  display: flex;
+  padding: 1rem;
+  margin-bottom: 0;
+ gap: 1em;
+}
+
+button, label {
+  outline-offset: -2px;
+  outline-size: 3px;
+  display: inline-block;
+  border: 2px dashed currentcolor;
+  padding: 8px;
+  user-select: nonze;
+  }
+input { display: none; }
+
+article {
+border: 100px dashed blue;
+/*backdrop-filter: invert(1);*/
+}
+
+:root {
+  --alt: magenta;
+  --accent: yellow;
+  }
+
+/*:has(#one:popover-open) button#bone { color: var(--accent)}
+:has(#two:popover-open) button#btwo { color: var(--accent)}
+:has(#three:popover-open) button { color: var(--accent)}*/
+
+:has(#one:popover-open)   #bone,
+:has(#two:popover-open)   #btwo,
+:has(#three:popover-open) #bthree,
+input:checked + label
+/*:has(#protX:popover-open)   #brotX,
+:has(#protY:popover-open)   #brotY,
+:has(#protZ:popover-open)   #brotZ,*/ { color: var(--alt)}
+
+#info { display: none }
+:has(input:checked) #info { display: block }
+
+
+
+
+/* Transition for the popover itself */
+
+[popover]:popover-open {
+  
+  
+  
+  opacity: 1;
+  filter: grayscale(0%);
+}
+/*
+  position: fixed;
+  inset: 0;
+  width: fit-content;
+  height: fit-content;
+  margin: auto;
+  border: solid;
+  padding: 0.25em;
+  overflow: auto;
+  color: CanvasText;
+  background-color: Canvas;
+
+*/
+[popover] {
+
+  border: none;
+  overflow: unset;
+  background-color: transparent;
+  filter: grayscale(100%);
+  font-size: 1.2rem;
+  padding: 100px;
+  position: relative;
+  inset: unset;
+  top: 25%;
+  left: 25%;
+  width: 200px;
+  height: 50px;
+  margin: 0;
+  transform: scale(.5);
+  
+  color: var(--alt);
+    /* Final state of the exit animation */
+  opacity: 0;
+ 
+  
+  transition: all
+  .7s ease-in-out allow-discrete !important;
+}
+
+/* Needs to be after the previous [popover]:popover-open rule
+to take effect, as the specificity is the same */
+@starting-style {
+  [popover]:popover-open {
+    opacity: 0;
+    filter: grayscale(100%);
+  }
+}
+
+[popover]::backdrop {
+  backdrop-filter: invert(0);
+  transition: all .5s ease-out allow-discrete;
+  }
+
+[popover]:popover-open::backdrop {
+  backdrop-filter: invert(0)}
+
+@starting-style {
+  [popover]:popover-open::backdrop { backdrop-filter: invert(1)}
+}
+
+/*#drotX, #drotY, #drot Z {
+display: none }
+
+:has(#protX:popover-open)   #drotX,
+:has(#protY:popover-open)   #drotY,
+:has(#protZ:popover-open)   #drotZ { display: flex }*/
+
+
+code { color: var(--accent); user-select: all}
+.pos {
+  list-style-type: '+ ';
+  
+  ::marker { color: green }
+}
+.neg {
+  list-style-type: '- ';
+  ::marker { color: red; }
+  }
+  
+::selection {
+  /*color: red;*/
+  background-color: blue;
+}
+
+</style>
+
+</head>
+<body class="anim">
+
+
+<menu>
+  <li>
+    <button id="bone" popovertarget="one">
+      Anim 1
+    </button>
+  </li>
+  <li>
+    <button id="btwo" popovertarget="two">
+      Anim 2
+    </button>
+  </li>
+  <li>
+    <button id ="bthree" popovertarget="three">
+      Anim 3
+    </button>
+  </li>
+  <li style="margin-left: auto; display: inline-block; background-color: white; width: 2px; height: px">&nbsp;
+  </li>
+  <li style="margin-left: auto;">
+    <input type="checkbox" id="frame"><label for="frame">Toggle</label>
+  </li>
+</menu>
+
+<!--
+<button id="brotX" popovertarget="protX">X</button>
+<button id="brotY" popovertarget="protY">Y</button>
+<button id="brotZ" popovertarget="protZ">Z</button>
+
+<div id="drotX" style="filter: hue-rotate(50deg); animation: rotX 5s ease infinite alternate">
+<div id="drotY" style="filter: hue-rotate(50deg); animation: rotY 6s ease infinite alternate">
+<div id="drotZ" style="filter: hue-rotate(50deg); animation: rotZ 7s ease infinite alternate">
+<em style="display: block !important">+++</em>
+</div></div></div>
+
+<div id="protX" popover="manual"><br>---</div>
+<div id="protY" popover="manual">
+&nbsp;|<br>
+&nbsp;|<br>
+&nbsp;|</div>
+<div id="protZ" popover="manual">BEACON</div>
+-->
+<main>
+<div class="notes">
+<ul class="pos">
+  <li id="l0">
+    css <code>keyframe</code>/<code>transition</code> stuff
+  </li>
+  <li id="l1">
+  scuffed <code>popover api</code> animation
+  </li>
+  <li id="l2">
+    <code>:has(input:checked)</code>
+    selector for toggle option
+  </li>
+</ul>
+<ul class="neg">
+  <li id="l3">
+  <del style="opacity: .4">only either
+    <code>popover</code>
+    or
+    <code>::backdrop</code>
+    styling worked due to some bad css</del></li id="l4">
+    <li id="l5">
+    bad viewport behavior</li>
+</ul
+</div>
+
+
+<div hidden style="animation: rotY 10s steps(5) infinite" xstyle="position: absolute width: 200px; animation: rotX 19.1s ease-out alternate, rotZ 1.136s alternate ease-in infinite, rotY 1.19s ease-in-out alternate"></div>
+
+<article id="one" popover="manual">
+<section style="animation: rotZ 45.2s ease-in infinite; filter: saturate(40%)" hhidden align="center"><div class="rot">
+<em>S</em>
+	<div class="rot".style="animation: rotZ 17s ease-in infinite alternate, huef 17s ease-in infinite alternate;">
+	<em>X</em>
+		<div class="rot" style="animation: rotZ 13s ease-out infinite alternate, huef 13s ease-out infinite alternate;">
+		<em><strong>Y</strong></em>
+			<div class="rot" style="animation: rotZ 15s ease-in-out infinite alternate, huef 15s ease-in infinite alternate;">
+			<em>Z</em>
+				<div class="rot">
+				<span class="rot"><em>S</em><span class="rot X A" style="animation: rotZ 7s ease-in infinite alternate, huef 7s ease-in infinite alternate;"><em>X</em><span class="rot Y A" style="animation: rotZ 3s ease-out infinite alternate, huef 3s ease-out infinite alternate;"><em>Y</em><span class="rot Z A" style="animation: rotZ 5s ease-in-out infinite alternate, huef 17s ease-in-out infinite alternate";><em>Z</em><span class="rot A"><em>+</em></span><em>Z</em></span><em>Y</em></span><em>X</em></span><em>S</em></span>
+				</div>
+			<em>Z</em>
+		</div>
+		<em>Y</em>
+		</div>
+	<em>X</em>
+	</div>
+<em>S</em></div></section>
+</article>
+
+
+<!----------------><br><br><br><br>
+
+<article id="two" popover="manual">
+<section align="center" style=""> 
+<div style="animation: huefi 1s steps(2, jump-none) alternate infinite;"><div style="animation: rotZ 101s ease-in-out alternate infinite" class="rot">
+<em>S</em>
+	<div class="rot X">
+	<em>X</em>
+		<div class="rot Y">
+		<em><strong>Y</strong></em>
+			<div class="rot Z">
+			<em>Z</em>
+				<div class="rot">
+				<span class="rot"><em>S</em><span class="rot X A Z Y"><em>X</em><span class="rot Y A X Z"><em>Y</em><span class="rot Z A X Y"><em>Z</em><span class="rot A"><em>+</em></span><em>Z</em></span><em>Y</em></span><em>X</em></span><em>S</em></span>
+				</div>
+			<em>Z</em>
+		</div>
+		<em>Y</em>
+		</div>
+	<em>X</em>
+	</div>
+<em>S</em></div></section>
+</article>
+
+<!----------------><br><br><br><br>
+
+<article id="three" popover="manual">
+<section align="center"><div style="animation: rotZ 45.2s ease-in infinite;"><div class="rot Z">
+<em>S</em>
+	<div class="rot Z">
+	<em>X</em>
+		<div class="rot Z">
+		<em><strong>Y</strong></em>
+			<div class="rot Z">
+			<em>Z</em>
+				<div class="rot">
+				<span class="rot"><em>S</em><span class="rot Z A"><em>X</em><span class="rot Z A"><em>Y</em><span class="rot Z A"><em>Z</em><span class="rot A"><em>+</em></span><em>Z</em></span><em>Y</em></span><em>X</em></span><em>S</em></span>
+				</div>
+			<em>Z</em>
+		</div>
+		<em>Y</em>
+		</div>
+	<em>X</em>
+	</div>
+<em>S</em></div></section>
+</article>
+</main>
+</body>
+</html>
