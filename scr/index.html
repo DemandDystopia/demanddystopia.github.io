@@ -5,13 +5,42 @@
   	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
-	
+	<meta name=viewport content="width=device-width, initial-scale=0.5">
 
   <style>
+
+html {
+  scroll-behavior: smooth;
+}
+
+@keyframes targetted {  
+    0% {  
+       background-color: var(--color1);  
+       outline: .125em solid var(--color1); 
+       color:var(--100);
+    }  
+    50% { color: var(--100);}
+    
+    100% { outline: .125em solid transparent;
+    color: var(--color1);
+      
+    }  
+}  
+:target {animation: targetted 2500ms step-end;
+}
 	* {
 	 font-size: 105%;
 	 font-family: 'Roboto Mono', monospace;
-
+}
+h1:target {
+	color: var(--color1);
+	}
+	
+	:root {
+	  --color1: #FB9244;
+	  --color2: #E85028;
+	  --000: black;
+	  --100: white;
 	}
 	
 	.piano {
@@ -24,8 +53,8 @@
 	  text-align: center;
       width: 40px;
       height: 120px;
-      border: 1px solid #000;
-      background-color: #fff;
+      border: 1px solid var(--000);
+      background-color: var(--100);
       cursor: pointer;
 
     }
@@ -34,23 +63,19 @@
       color: #fff;
     }
     .key.red {
-      background-color: #FB9244;
+      background-color: var(--color1);
     }
 	.key.black.red {
-	 background-color: #E85028;
+	 background-color: var(--color2);
 	}
 	a {
-	color: #FB9244;
+	color: var(--color1);
 	text-decoration: none;
 	}
 	
 	textarea {
 	height: 100px;
 	width: 175px;
-	}
-	
-	h1:target {
-	color: #FB9244;
 	}
 	
 	.sidebar { 
@@ -73,18 +98,28 @@
 	}
 	
 	.info {
-	color: #E85028;
+	color: var(--color2);
+	}
+	
+	.notice {
+	  background-color: oklch(from var(--color2) calc(l * 1.5) calc(c * .75) 20 / .75);
+	 
+	  max-inline-size: 70vw;
+	  strong { display: block};
+	  outline: 2px solid oklch(from var(--color2) l calc(c * .75) 20 / 1);
 	}
   </style>
 </head>
 <body>
 
+<p class=notice>
+  <strong>This page works but is poorly made.</strong>Experience using mobile and/or requiring accessibility features may be poor. Expect this to change soon.
+</p>
 
 <div class="sidebar">
   <b><u>Navigation/Help</u></b><br>
 	<a href="#note selector" class="sidebarlink">note selector</a><br>
     <a href="#scroutput" class="sidebarlink">scr output</a><br>
-	<a href="#about" class="sidebarlink">about</a><br>
 	<span>About</span><br>
 	<a href="#functionality" class="sidebarlink">the site</a><br>
 	<a href="#usage" class="sidebarlink">usage<a/><br>
@@ -354,4 +389,4 @@ function copyToClipboard() {
 }
 </script>
 </body>
-</html>
+ </html>
