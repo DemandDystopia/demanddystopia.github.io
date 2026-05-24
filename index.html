@@ -48,7 +48,7 @@
 	 
 	 a {
 	  color: crimson;
-	  text-decoration: none;
+	  text-decoration: .225ch dotted underline color-mix(currentcolor, transparent)
 	  
 	 }
 	 
@@ -69,6 +69,21 @@
      flex-wrap: nowrap;
 
 	}
+
+	fieldset {
+		text-align: left;
+		margin-top:1.5lh;
+		width: max-content;
+		color: black;
+		border: .25ch solid #FF5F5F;
+		background-color: #fcc;
+	}
+	legend {
+		margin-right: auto;
+	color:black;
+	background-color: #FF5F5F;
+	padding-inline: .5ch;
+	}
   </style>
 </head>
 <body>
@@ -81,18 +96,13 @@
 <video controls width=250" loop autoplay muted>
 	<source src="frog.webm" type="video/webm">
 </video>
-
-<p style="
-margin-top:5lh;
-padding-block: .5lh;
-margin-inline: 10ch;
-outline: .25ch solid red;
-background-color: #ff000033;">
+<div style="display:grid; place-items: center;">
+<fieldset><legend>NEW DOMAIN</legend>
 demanddystopia.su was deprecated
-<br>visit <a href="https://demanddystopia.github.io">demanddystopia.github.io</a> to get <em>redirected</em> to the new domain</p>
+<br>visit <a href="https://demanddystopia.net">demanddystopia.net</a> for the new domain
 <!--	<div class="links">
 		<p><a href="flscr">_flSCR&nbsp;&nbsp;</a></p>
 		<p><a href="https://twitter.com/DemandDystopia">_Twitter</a></p>
 	</div> -->
-</div>
+</fieldset></div></div>
 </body>

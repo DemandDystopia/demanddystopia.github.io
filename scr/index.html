@@ -70,8 +70,13 @@ h1:target {
 	}
 	a {
 	color: var(--color1);
-	text-decoration: none;
-	}
+	  text-decoration: .125ch dotted underline color-mix(currentcolor, transparent);
+		  transition: 0.085s;
+  }
+  a:hover {
+    text-decoration-style: solid;
+    color: var(--color2);
+  }
 	
 	textarea {
 	height: 100px;
@@ -108,13 +113,31 @@ h1:target {
 	  strong { display: block};
 	  outline: 2px solid oklch(from var(--color2) l calc(c * .75) 20 / 1);
 	}
+
+  	fieldset {
+		text-align: left;
+		margin-top:1.5lh;
+		width: max-content;
+		color: black;
+		border: .25ch solid var(--color2);
+		background-color: color-mix(var(--100) 80%, var(--color2));
+	}
+	legend {
+		margin-right: auto;
+	color:black;
+	background-color: var(--color2);
+  color: var(--100);
+	padding-inline: .5ch;
+	}
   </style>
 </head>
 <body>
-<p class="notice">
-<strong>Visit <a href="https://demanddystopia.github.io/scr">https://demanddystopia.github.io/scr</a> to get <em>redirected</em> to the new domain instead! </strong
-</p>
-<!-- <p class=notice> -->
+  <div style="display:grid; place-items: center;">
+<fieldset><legend>NEW DOMAIN</legend>
+demanddystopia.su was deprecated
+<br>visit <a href="https://demanddystopia.net/scr">demanddystopia.net/scr</a> for the new domain
+</fieldset></div>
+<!--  -->
   <!-- <strong>This page works but is poorly made.</strong>Experience using mobile and/or requiring accessibility features may be poor. Expect this to change soon. -->
 <!-- </p> -->
 
