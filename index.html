@@ -372,8 +372,10 @@ video {
 	/* grid-column: 3;
 	grid-row: span 2; */
 	grid-area: video;
+	/* object-fit: cover; */
 	/* margin-top: .83em; */
 	margin-top: .5em;
+	height: max-content;
 	/* ^ only needed if h2 is present 
 	max-height: 500px;*/
 	box-shadow: var(--xx-shdw) var(--clr-a2);
@@ -393,6 +395,7 @@ video {
 	display: grid;
 	place-items: center;
 	container-type: size;
+	height: 50%;
 
 }
 
@@ -400,15 +403,18 @@ video {
 	/* from	{ translate:  100% 0} */
     /* to		{ translate: -100% 0} */
 /* } */
+
+article:nth-child(2) {
+	height: 84.5%;
+}
 .marquee {
 	background-color: #eee;
-border: .5ch solid var(--clr-bl)
+border: .5ch solid var(--clr-bl);
 }
 svg {
 	animation: marquee 5s linear infinite;
 	width: 100cqw;
-	height: 95cqh;
-
+	height: 90cqh;
 }
 </style>
 
