@@ -1,0 +1,36 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+    color-scheme: light
+}
+
+body {
+    min-height: 100svh;
+}
+
+/* makes them more responsive */
+img,video,svg,picture {
+    display:block;
+    max-width: 100%;
+}
+
+h1,h2,h3,h4,h5,h6 {
+	text-wrap: balanced;
+}
+
+input,textarea,select,button {
+    font: inherit;
+}
+
+li {
+    list-style: square;
+}
+
+
+dl, ul {
+	margin:0;
+}

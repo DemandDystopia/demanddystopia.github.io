@@ -1,0 +1,22 @@
+@layer reset, base, page, utils;
+
+/*--LAYERS--+
+| utils: 🟧 | (global)
+| page : 🟩 | (unique)
+| base : 🟦 | (semi-global)
+| reset: 🟥 | (global)
++----------*/
+
+@layer utils {
+
+}
+
+/* @layer base { */
+:any-link[href^="http"] {
+    color: var(--clr-bl);
+    text-decoration-style: double;
+    text-decoration-color: var(--clr-blue);
+}
+/* } */
+
+
