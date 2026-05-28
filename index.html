@@ -40,9 +40,11 @@ html {
 	--clr-3: #f5ff3b; 
 	--clr-a2: greenyellow;
 	--clr-blue: oklch(50% 0.3 284);
+	--clr-prpl: color-mix(in lab, var(--clr-blue), var(--clr-a));
 	--clr-wh: ghostwhite;
 	--clr-bl: #2b2b2b; 
 
+	--profile-size: 3lh;
 	--xx-shdw: .5ch .5ch 0;
 	--x-shdw: .35ch .35ch 0;
 	color: var(--clr-bl);
@@ -55,67 +57,13 @@ html {
 	}
 
 body {
-/*
-  background-image:
-    linear-gradient(
-         to right,
-         var(--g_color) var(--g_thickness),
-         transparent var(--g_thickness)
-        ),
-        linear-gradient(
-          to top,
-          var(--g_color) var(--g_thickness),
-          transparent var(--g_thickness)
-        ),
-        linear-gradient(
-          to left,
-          var(--g_color) var(--g_thickness),
-          transparent var(--g_thickness)
-        ),
-        linear-gradient(
-          to bottom,
-          var(--g_color) var(--g_thickness),
-          var(--g_bg_color) var(--g_thickness)
-        );
-  --g_bg_color: var(--clr-wh);
-  --g_color: #ddd;
-  --g_thickness: .0625ch;
-  --g_thickness: .25ch;
-  --g_thickness: 1px;
-  --bg_size: 1vmin;
-  --bg_pos: calc(var(--bg_size) * .5);
-  background-position: var(--bg_pos) var(--bg_pos);
-  background-repeat: round repeat;
-  background-size: var(--bg_size) var(--bg_size);*/
-
 
     background:
-	/*repeating-linear-gradient(
-         to right,
-         var(--g2_color) var(--g2_thickness),
-         transparent var(--g2_thickness)
-        ),
-        linear-gradient(
-          to top,
-          var(--g2_color) var(--g2_thickness),
-          transparent var(--g2_thickness)
-        ),
-        linear-gradient(
-          to left,
-          var(--g2_color) var(--g2_thickness),
-          transparent var(--g2_thickness)
-        ),
-        linear-gradient(
-          to bottom,
-          var(--g2_color) var(--g2_thickness),
-          var(--g2_bg_color) var(--g2_thickness)
-        ) calc( 1vmin / 3),*/
-
 
     linear-gradient(
-			to right,
-         	var(--g_color) var(--g_thickness),transparent var(--g_thickness)
-        ) var(--g-decl),
+		to right,
+        var(--g_color) var(--g_thickness),transparent var(--g_thickness)
+    ) var(--g-decl),
     linear-gradient(
 		to top,
         var(--g_color) var(--g_thickness), transparent var(--g_thickness)
@@ -178,7 +126,7 @@ body {
 		var(--g2_bg_size) var(--g2_bg_size) repeat repeat; 
 	/* background-position: var(--bg_pos) var(--bg_pos); */
   /* background-repeat: round repeat; */
-  /* background-size: var(--bg_size) var(--bg_size); */ */
+  /* background-size: var(--bg_size) var(--bg_size); */
  
   }
 
@@ -211,7 +159,7 @@ body {
 	main {grid-area: main}
 	header {grid-area:header} 
 	main,header {
-		width: clamp(600px, 600px, 75vw);
+		width: clamp(625px, 625px, 75vw);
 	}
 	min-height: 95vh;
 	justify-items: center;
@@ -225,17 +173,26 @@ main {
 	padding:0;
 }
 
+
+@keyframes wiggle {
+	0%,50%,100% {background-position-x: 0%;}
+	25% { background-position-x: 5%}
+	75% { background-position-x: -5%}
+}
+
 .title {
 	padding: 0.125lh .5ch;
-	isolation: isolate;
+	/* isolation: isolate; */
 	font-size: xx-large;
 	/* background-color: var(--clr-a); */
 	/* color: var(--clr-wh); */
 	z-index: 105;
+	min-height: 1.5lh;
 	color: var(--clr-wh);
 	font-weight: 625;
 	/* text-shadow: .125ch .125ch 0 lime; */
-	position:relative; &::after, &::before {content: "";position: absolute}
+	position:relative; &::after, &::before {content: "";position: absolute;
+		transition: background 1500ms}
 	&::before {
 		z-index: -100;
 		inset: 0;
@@ -246,13 +203,51 @@ main {
 		z-index: -99;
 		inset: 40% -5% -25% 15%; /* TRdl */
 		inset: 40% -5% -25% 47%; /* TRdl */
-
-
+		inset: 40% -5% -25% 30%; /* TRdl */
+		inset: 0 25%;
+		translate: 55% 35%;
+		background: url('_res/lain.jpg');
+		background-size: 100%;
+		background-position-y: 60%;
+		/* rotate: 4deg; */
+		background-blend-mode: multiply;
+		background-repeat: no-repeat;
+		
 		/* background-color: #ff0000;
-		 */
+		*/
+		
 		background-color: var(--clr-a);
+		background-color: var(--clr-a2);
+					/* transition-delay: 500ms; */
 	}
+	&::before {
+		/* background-image: url('_res/lain.jpg'); */
+		background-blend-mode: multiply;
+		background-repeat: no-repeat;
+		background-blend-mode: darken;
+		background-position-y: 56%;
+		background-position-y:  15%;
+	}
+}
 
+:is(:has(:any-link:hover),:has(.id:hover)) .title,
+.title:hover {
+		/* &::before {
+			background-position-y: 42%;
+			background-position-y: 38%;
+		} */
+		&::after {
+			background-size: 105%;
+			background-position-y: 41%;
+			transition-delay: 500ms;
+			transition: background 1500ms;
+		}
+}
+
+.title {
+	:has(#social-media .id:hover) &::after {background-color: var(--clr-prpl);}
+	:has(#music:hover) &::after {background-color: var(--clr-a);}
+	:has(#general:hover) &::after {background-color: var(--clr-blue);}
 }
 
 legend {
@@ -279,66 +274,68 @@ h2 {
 	/* border: .25ch solid #ddd; */
 	/* display: inline-block; */
 	/* box-shadow: .25ch .25ch 0 red; */
-	
 }
 
-#social-media, #tbd {
-	width: 100%;
-	background-color: #eee;
-	box-shadow: var(--x-shdw) var(--clr-bl);
+#general,#music {
+	box-shadow: var(--x-shdw) var(--_clr);
+	:any-link {text-decoration-color: var(--_clr);}
+	:any-link, .id {transition: color 150ms;
+	&:hover {color: var(--_clr)}}
+	.id::selection {background-color: var(--_clr);}
+	legend {color: var(--_clr) };
 }
 #general, #music {
 	width: 100%;
 	background-color: var(--clr-wh);
-	box-shadow: var(--x-shdw) var(--_clr);
-	:any-link {text-decoration-color: var(--_clr);}
-	legend {color: var(--_clr) }
 }
+
+#social-media, #tbd {
+	box-shadow: var(--x-shdw) var(--clr-bl);
+	width: 100%;
+	background-color: #eee;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: 1fr;
+	gap: 1ch;
+	.id {
+		transition: color 150ms;
+		&::selection{
+			background-color: var(--clr-prpl);
+		}
+		&:hover {
+			color: var(--clr-prpl);
+		}
+	}
+}
+
+ul,li {
+	padding: 0;
+	margin: 0 1.5ch 0;
+}
+
 #general {
 	--_clr: var(--clr-blue);
 }
 #music {
 	--_clr: var(--clr-a)
 }
-fieldset ~ fieldset,
+/* fieldset ~ fieldset, */
 article ~ article {
 	margin-top: .5lh;
 }
-dt {
-	/* margin: 0; */
-	/* display: block; */
-	/* width: 10ch; */
-	float:left;
-	margin-right: 1ch;
-	min-width: 25%;
-}
-dd {
-	margin:0;
-	/* display: inline-block; */
-}
+
 
 .grid {
 	display: grid;
-	/* grid-template-columns:
-	
-	[cbox1-start cbox2-start cconst-start] 1fr [cbox1-end cbox2-end cconst-end]
+	grid-template-columns:  
+	[links-start const-start] 1fr [links-end const-end]
 	5ch
-	[cvideo-start] 1fr [cvideo-end];
+	[video-start] 1fr [video-end]
+	;
 	
-	grid-template-rows:
-		[cbox1-start cvideo-start] 1fr [cbox1-end]
-		[cconst-sart] 1fr [cvideo-end cconst-end]; */
-
-		grid-template-columns:  
-		[links-start const-start] 1fr [links-end const-end]
-		5ch
-		[video-start] 1fr [video-end]
-		;
-		
-		grid-template-rows: 
-		[links-start video-start] 1fr [links-end const-start]
-		1fr [video-end const-end];
-
+	grid-template-rows: 
+	[links-start video-start] 1fr [links-end const-start]
+	1fr [video-end const-end];
 }
 
 @media (width < 625px) {
@@ -358,12 +355,10 @@ dd {
 			/* height: 100% */
 	}
 }
-	/* h2 {grid-column: 1;} */
+
 article:first-of-type {
-	/* grid-column: 1; grid-row: 1; */
 	grid-area: links;}
 	article:nth-of-type(2) {
-		/* grid-row: 2; */
 		grid-area: const;
 	}
 
@@ -375,6 +370,7 @@ video {
 	/* object-fit: cover; */
 	/* margin-top: .83em; */
 	margin-top: .5em;
+	margin-left: 5px; /*🌌*/
 	height: max-content;
 	/* ^ only needed if h2 is present 
 	max-height: 500px;*/
@@ -399,10 +395,6 @@ video {
 
 }
 
-/* @keyframes marquee { */
-	/* from	{ translate:  100% 0} */
-    /* to		{ translate: -100% 0} */
-/* } */
 
 article:nth-child(2) {
 	height: 84.5%;
@@ -410,11 +402,26 @@ article:nth-child(2) {
 .marquee {
 	background-color: #eee;
 border: .5ch solid var(--clr-bl);
+margin-inline: auto;
+width: 200%;
 }
 svg {
-	animation: marquee 5s linear infinite;
-	width: 100cqw;
+
+	width: 100%;
 	height: 90cqh;
+}
+
+header {
+	margin-bottom: 1.5lh;
+	img {
+		max-height: var(--profile-size);
+		z-index: 150;
+		margin-left: auto;
+
+		border-radius: 100vmax;
+		border: 0ch solid var(--clr-wh);
+
+	}
 }
 </style>
 
@@ -422,11 +429,12 @@ svg {
 
 <body>
 <header>
-<p class="title" href="#">	
-	DemandDystopia<span class="alt">.net</span>
-
+<div class="title" href="#">
+	<div>DemandDystopia<span class="alt">.net</span></div>
+	<!-- <img src="_res/pfp_gh.jpg"> -->
+</div>
 </header>
-	<!-- <div>formerly known as DemandDystopia.su</div> -->
+
 
 
 <main>
@@ -437,26 +445,21 @@ svg {
         <legend id=social-media-h>Social Media</legend>
         <fieldset id=general>
             <legend>Personal</legend>
-            <dl>
-                <dt><a target="_blank" href="https://x.com/DemandDystopia">Twitter</a>
-					<dd class="id">demanddystopia</span>
-                <dt><a target="_blank" href="https://https://www.youtube.com/@Raven_DemandDystopia">YouTube</a> 
-					<dd class="id">Raven_DemandDystopia</span>
-                <dt>Discord: 
-					<dd class="id">demanddystopia</span>
-                <dt><a target="_blank" href="https://github.com/DemandDystopia">Github</a> 
-					<dd class="id">DemandDystopia
-            </dl>
-        </fieldset>
-        <fieldset id=music>
-            <legend>Music</legend>
-            <dl>
-                <dt><a target="_blank" href="https://www.youtube.com/@DemandDystopia">YouTube</a> 
-					<dd class="id">DemandDystopia</span>
-                <dt><a target="_blank" href="https://demanddystopia.bandcamp.com">Bandcamp</a>
-					<dd>DemandDystopia
-            </dl>
-        </fieldset>
+            <ul>
+                <li><a target="_blank" href="https://x.com/DemandDystopia">Twitter</a>
+                <li><a target="_blank" href="https://www.youtube.com/@Raven_DemandDystopia">YouTube</a> 
+				<li><a target="_blank" href="https://github.com/DemandDystopia">Github</a> 
+			</ul>
+			</fieldset>
+			<fieldset id=music>
+			<legend>Music</legend>
+			<ul>
+				<li><a target="_blank" href="https://www.youtube.com/@DemandDystopia">YouTube</a> 
+				<li><a target="_blank" href="https://demanddystopia.bandcamp.com">Bandcamp</a>
+			</ul>
+		</fieldset>
+			<ul style="grid-column: span 2">
+				<li>Discord: <span class="id">demanddystopia</span></li>
     </fieldset>
 	</article>
 	<article style="opacity:.5">
@@ -480,6 +483,11 @@ svg {
 	<rect id="_Transparent_Rectangle_" data-name="&lt;Transparent Rectangle&gt;" class="cls-1" width="32" height="32"/>
 </g>
 </defs>
+
+<use href="#man" x="-32">
+	<animate attributeName="x" values="-32;32"
+		dur="5s" repeatCount="indefinite"/>
+</use>
 <use href="#man" x="0">
 	<animate attributeName="x" values="0;64"
 		dur="5s" repeatCount="indefinite"/>
@@ -492,6 +500,10 @@ svg {
 	<animate attributeName="x" values="64;128"
 		dur="5s" repeatCount="indefinite"/>
 </use>
+<use href="#man" x="96">
+	<animate attributeName="x" values="96;160"
+		dur="5s" repeatCount="indefinite"/>
+</use>
 </svg>
 </div>
 	</article>
@@ -501,4 +513,6 @@ svg {
 
 </section>
 </main>
+
 </body>
+</html>
